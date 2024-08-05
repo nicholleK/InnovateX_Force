@@ -21,5 +21,5 @@ This project is a marketplace platform where students and local residents can bu
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/marketplace-project.git
+   git clone https://github.com/faffynicole/InnovateX_Force.git
 
