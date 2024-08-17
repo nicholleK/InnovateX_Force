@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Database1" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="Database1ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.UserProduct" Member="UserProducts">
+    <Type Name="UserProduct">
+      <Column Name="User_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Product_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Product_UserProduct" Member="Product" ThisKey="Product_Id" OtherKey="Product_Id" Type="Product" IsForeignKey="true" />
+      <Association Name="User_UserProduct" Member="User" ThisKey="User_Id" OtherKey="User_Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Transaction]" Member="Transactions">
+    <Type Name="Transaction">
+      <Column Name="Transaction_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Buyer_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Seller_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Product_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Transaction_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Transaction_Payment" Member="Payments" ThisKey="Transaction_Id" OtherKey="Transaction_Id" Type="Payment" />
+      <Association Name="Product_Transaction" Member="Product" ThisKey="Product_Id" OtherKey="Product_Id" Type="Product" IsForeignKey="true" />
+      <Association Name="User_Transaction" Member="User" ThisKey="Buyer_Id" OtherKey="User_Id" Type="User" IsForeignKey="true" />
+      <Association Name="User_Transaction1" Member="User1" ThisKey="Seller_Id" OtherKey="User_Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Review" Member="Reviews">
+    <Type Name="Review">
+      <Column Name="Review_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Product_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Reviewer_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Review_Text" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Created_At" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Product_Review" Member="Product" ThisKey="Product_Id" OtherKey="Product_Id" Type="Product" IsForeignKey="true" />
+      <Association Name="User_Review" Member="User" ThisKey="Reviewer_Id" OtherKey="User_Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Report" Member="Reports">
+    <Type Name="Report">
+      <Column Name="Report_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Reporter_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Reported_User_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Reported_Product_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Report_Reason" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Report_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Product_Report" Member="Product" ThisKey="Reported_Product_Id" OtherKey="Product_Id" Type="Product" IsForeignKey="true" />
+      <Association Name="User_Report" Member="User" ThisKey="Reported_User_Id" OtherKey="User_Id" Type="User" IsForeignKey="true" />
+      <Association Name="User_Report1" Member="User1" ThisKey="Reporter_Id" OtherKey="User_Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Product" Member="Products">
+    <Type Name="Product">
+      <Column Name="Product_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Seller_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Category_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Product_Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Product_Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Product_Type" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Product_UserProduct" Member="UserProducts" ThisKey="Product_Id" OtherKey="Product_Id" Type="UserProduct" />
+      <Association Name="Product_Transaction" Member="Transactions" ThisKey="Product_Id" OtherKey="Product_Id" Type="Transaction" />
+      <Association Name="Product_Review" Member="Reviews" ThisKey="Product_Id" OtherKey="Product_Id" Type="Review" />
+      <Association Name="Product_Report" Member="Reports" ThisKey="Product_Id" OtherKey="Reported_Product_Id" Type="Report" />
+      <Association Name="Product_Order" Member="Orders" ThisKey="Product_Id" OtherKey="Product_Id" Type="Order" />
+      <Association Name="Category_Product" Member="Category" ThisKey="Category_Id" OtherKey="Category_Id" Type="Category" IsForeignKey="true" />
+      <Association Name="User_Product" Member="User" ThisKey="Seller_Id" OtherKey="User_Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Payment" Member="Payments">
+    <Type Name="Payment">
+      <Column Name="Payment_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Transaction_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Payment_Method" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Payment_Status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Payment_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Transaction_Payment" Member="Transaction" ThisKey="Transaction_Id" OtherKey="Transaction_Id" Type="Transaction" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Order]" Member="Orders">
+    <Type Name="Order">
+      <Column Name="Order_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Buyer_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Product_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Order_Status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Order_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Product_Order" Member="Product" ThisKey="Product_Id" OtherKey="Product_Id" Type="Product" IsForeignKey="true" />
+      <Association Name="User_Order" Member="User" ThisKey="Buyer_Id" OtherKey="User_Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Category" Member="Categories">
+    <Type Name="Category">
+      <Column Name="Category_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Category_Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Category_Product" Member="Products" ThisKey="Category_Id" OtherKey="Category_Id" Type="Product" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="User_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password_Hash" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="User_Type" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="User_UserProduct" Member="UserProducts" ThisKey="User_Id" OtherKey="User_Id" Type="UserProduct" />
+      <Association Name="User_Transaction" Member="Transactions" ThisKey="User_Id" OtherKey="Buyer_Id" Type="Transaction" />
+      <Association Name="User_Transaction1" Member="Transactions1" ThisKey="User_Id" OtherKey="Seller_Id" Type="Transaction" />
+      <Association Name="User_Review" Member="Reviews" ThisKey="User_Id" OtherKey="Reviewer_Id" Type="Review" />
+      <Association Name="User_Report" Member="Reports" ThisKey="User_Id" OtherKey="Reported_User_Id" Type="Report" />
+      <Association Name="User_Report1" Member="Reports1" ThisKey="User_Id" OtherKey="Reporter_Id" Type="Report" />
+      <Association Name="User_Product" Member="Products" ThisKey="User_Id" OtherKey="Seller_Id" Type="Product" />
+      <Association Name="User_Order" Member="Orders" ThisKey="User_Id" OtherKey="Buyer_Id" Type="Order" />
+    </Type>
+  </Table>
+</Database>
