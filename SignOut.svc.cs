@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -11,8 +11,28 @@ namespace backend1
     // NOTE: In order to launch WCF Test Client for testing this service, please select SignOut.svc or SignOut.svc.cs at the Solution Explorer and start debugging.
     public class SignOut : ISignOut
     {
-        public void DoWork()
+        DataClasses1DataContext db = new DataClasses1DataContext();
+
+        bool ISignOut.SignOut(string UserName)
         {
+            var user = db.Users.SingleOrDefault(u => u.Username == UserName);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            db.Users.DeleteOnSubmit(user);
+            try
+            {
+                db.SubmitChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ex.GetBaseException();
+                return false;
+            }
         }
     }
 }
