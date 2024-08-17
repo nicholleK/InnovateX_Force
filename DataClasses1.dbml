@@ -103,6 +103,14 @@
       <Column Name="Password_Hash" Type="System.String" DbType="VarChar(64) NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="User_Type" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ZipCode" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="IsVerified" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedAt" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="VerificationDocument" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="User_UserProduct" Member="UserProducts" ThisKey="User_Id" OtherKey="User_Id" Type="UserProduct" />
       <Association Name="User_Transaction" Member="Transactions" ThisKey="User_Id" OtherKey="Buyer_Id" Type="Transaction" />
       <Association Name="User_Transaction1" Member="Transactions1" ThisKey="User_Id" OtherKey="Seller_Id" Type="Transaction" />
@@ -111,6 +119,14 @@
       <Association Name="User_Report1" Member="Reports1" ThisKey="User_Id" OtherKey="Reporter_Id" Type="Report" />
       <Association Name="User_Product" Member="Products" ThisKey="User_Id" OtherKey="Seller_Id" Type="Product" />
       <Association Name="User_Order" Member="Orders" ThisKey="User_Id" OtherKey="Buyer_Id" Type="Order" />
+      <Association Name="User_Verification" Member="Verification" ThisKey="User_Id" OtherKey="VerificationID" Type="Verification" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Verification" Member="Verifications">
+    <Type Name="Verification">
+      <Column Name="VerificationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="VerificationDocument" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="User_Verification" Member="User" ThisKey="VerificationID" OtherKey="User_Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

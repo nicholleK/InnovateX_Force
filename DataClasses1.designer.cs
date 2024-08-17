@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InnovativeXProject
+namespace backend1
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -57,6 +57,9 @@ namespace InnovativeXProject
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
+    partial void InsertVerification(Verification instance);
+    partial void UpdateVerification(Verification instance);
+    partial void DeleteVerification(Verification instance);
     #endregion
 		
 		public DataClasses1DataContext() : 
@@ -158,6 +161,14 @@ namespace InnovativeXProject
 			get
 			{
 				return this.GetTable<User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Verification> Verifications
+		{
+			get
+			{
+				return this.GetTable<Verification>();
 			}
 		}
 	}
@@ -2301,6 +2312,22 @@ namespace InnovativeXProject
 		
 		private bool _User_Type;
 		
+		private string _PhoneNumber;
+		
+		private string _Address;
+		
+		private string _City;
+		
+		private string _ZipCode;
+		
+		private System.Nullable<bool> _IsVerified;
+		
+		private System.DateTime _CreatedAt;
+		
+		private System.DateTime _UpdatedAt;
+		
+		private string _VerificationDocument;
+		
 		private EntitySet<UserProduct> _UserProducts;
 		
 		private EntitySet<Transaction> _Transactions;
@@ -2317,6 +2344,8 @@ namespace InnovativeXProject
 		
 		private EntitySet<Order> _Orders;
 		
+		private EntityRef<Verification> _Verification;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2331,6 +2360,22 @@ namespace InnovativeXProject
     partial void OnEmailChanged();
     partial void OnUser_TypeChanging(bool value);
     partial void OnUser_TypeChanged();
+    partial void OnPhoneNumberChanging(string value);
+    partial void OnPhoneNumberChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnCityChanging(string value);
+    partial void OnCityChanged();
+    partial void OnZipCodeChanging(string value);
+    partial void OnZipCodeChanged();
+    partial void OnIsVerifiedChanging(System.Nullable<bool> value);
+    partial void OnIsVerifiedChanged();
+    partial void OnCreatedAtChanging(System.DateTime value);
+    partial void OnCreatedAtChanged();
+    partial void OnUpdatedAtChanging(System.DateTime value);
+    partial void OnUpdatedAtChanged();
+    partial void OnVerificationDocumentChanging(string value);
+    partial void OnVerificationDocumentChanged();
     #endregion
 		
 		public User()
@@ -2343,6 +2388,7 @@ namespace InnovativeXProject
 			this._Reports1 = new EntitySet<Report>(new Action<Report>(this.attach_Reports1), new Action<Report>(this.detach_Reports1));
 			this._Products = new EntitySet<Product>(new Action<Product>(this.attach_Products), new Action<Product>(this.detach_Products));
 			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
+			this._Verification = default(EntityRef<Verification>);
 			OnCreated();
 		}
 		
@@ -2442,6 +2488,166 @@ namespace InnovativeXProject
 					this._User_Type = value;
 					this.SendPropertyChanged("User_Type");
 					this.OnUser_TypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(10) NOT NULL", CanBeNull=false)]
+		public string PhoneNumber
+		{
+			get
+			{
+				return this._PhoneNumber;
+			}
+			set
+			{
+				if ((this._PhoneNumber != value))
+				{
+					this.OnPhoneNumberChanging(value);
+					this.SendPropertyChanging();
+					this._PhoneNumber = value;
+					this.SendPropertyChanged("PhoneNumber");
+					this.OnPhoneNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(MAX)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string City
+		{
+			get
+			{
+				return this._City;
+			}
+			set
+			{
+				if ((this._City != value))
+				{
+					this.OnCityChanging(value);
+					this.SendPropertyChanging();
+					this._City = value;
+					this.SendPropertyChanged("City");
+					this.OnCityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ZipCode", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string ZipCode
+		{
+			get
+			{
+				return this._ZipCode;
+			}
+			set
+			{
+				if ((this._ZipCode != value))
+				{
+					this.OnZipCodeChanging(value);
+					this.SendPropertyChanging();
+					this._ZipCode = value;
+					this.SendPropertyChanged("ZipCode");
+					this.OnZipCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsVerified", DbType="Bit")]
+		public System.Nullable<bool> IsVerified
+		{
+			get
+			{
+				return this._IsVerified;
+			}
+			set
+			{
+				if ((this._IsVerified != value))
+				{
+					this.OnIsVerifiedChanging(value);
+					this.SendPropertyChanging();
+					this._IsVerified = value;
+					this.SendPropertyChanged("IsVerified");
+					this.OnIsVerifiedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedAt", DbType="Date NOT NULL")]
+		public System.DateTime CreatedAt
+		{
+			get
+			{
+				return this._CreatedAt;
+			}
+			set
+			{
+				if ((this._CreatedAt != value))
+				{
+					this.OnCreatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedAt = value;
+					this.SendPropertyChanged("CreatedAt");
+					this.OnCreatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedAt", DbType="Date NOT NULL")]
+		public System.DateTime UpdatedAt
+		{
+			get
+			{
+				return this._UpdatedAt;
+			}
+			set
+			{
+				if ((this._UpdatedAt != value))
+				{
+					this.OnUpdatedAtChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedAt = value;
+					this.SendPropertyChanged("UpdatedAt");
+					this.OnUpdatedAtChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VerificationDocument", DbType="VarChar(MAX)")]
+		public string VerificationDocument
+		{
+			get
+			{
+				return this._VerificationDocument;
+			}
+			set
+			{
+				if ((this._VerificationDocument != value))
+				{
+					this.OnVerificationDocumentChanging(value);
+					this.SendPropertyChanging();
+					this._VerificationDocument = value;
+					this.SendPropertyChanged("VerificationDocument");
+					this.OnVerificationDocumentChanged();
 				}
 			}
 		}
@@ -2547,6 +2753,35 @@ namespace InnovativeXProject
 			set
 			{
 				this._Orders.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Verification", Storage="_Verification", ThisKey="User_Id", OtherKey="VerificationID", IsUnique=true, IsForeignKey=false)]
+		public Verification Verification
+		{
+			get
+			{
+				return this._Verification.Entity;
+			}
+			set
+			{
+				Verification previousValue = this._Verification.Entity;
+				if (((previousValue != value) 
+							|| (this._Verification.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Verification.Entity = null;
+						previousValue.User = null;
+					}
+					this._Verification.Entity = value;
+					if ((value != null))
+					{
+						value.User = this;
+					}
+					this.SendPropertyChanged("Verification");
+				}
 			}
 		}
 		
@@ -2664,6 +2899,133 @@ namespace InnovativeXProject
 		{
 			this.SendPropertyChanging();
 			entity.User = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Verification")]
+	public partial class Verification : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _VerificationID;
+		
+		private string _VerificationDocument;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnVerificationIDChanging(int value);
+    partial void OnVerificationIDChanged();
+    partial void OnVerificationDocumentChanging(string value);
+    partial void OnVerificationDocumentChanged();
+    #endregion
+		
+		public Verification()
+		{
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VerificationID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int VerificationID
+		{
+			get
+			{
+				return this._VerificationID;
+			}
+			set
+			{
+				if ((this._VerificationID != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnVerificationIDChanging(value);
+					this.SendPropertyChanging();
+					this._VerificationID = value;
+					this.SendPropertyChanged("VerificationID");
+					this.OnVerificationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_VerificationDocument", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string VerificationDocument
+		{
+			get
+			{
+				return this._VerificationDocument;
+			}
+			set
+			{
+				if ((this._VerificationDocument != value))
+				{
+					this.OnVerificationDocumentChanging(value);
+					this.SendPropertyChanging();
+					this._VerificationDocument = value;
+					this.SendPropertyChanged("VerificationDocument");
+					this.OnVerificationDocumentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Verification", Storage="_User", ThisKey="VerificationID", OtherKey="User_Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Verification = null;
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Verification = this;
+						this._VerificationID = value.User_Id;
+					}
+					else
+					{
+						this._VerificationID = default(int);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }
